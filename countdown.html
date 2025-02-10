@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>cpe-end</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: Inter, sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: url('Julius-bg.gif') no-repeat center center fixed;
+        background-size: cover;
+      }
+      
+      .countdown {
+        text-align: center;
+        background: rgba(255, 255, 0, 0.5); /* Semi-transparent background */
+        padding: 60px;
+        border-radius: 8px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+      }
+      
+      h1 {
+        font-size: 24px;
+        color: black;
+      }
+      
+      #days {
+        font-size: 72px;
+        font-weight: bold;
+        color: red;
+        margin: 60px 0 60px 0;
+      }
+      
+      #time {
+        font-size: 32px;
+        font-weight: bold;
+        color: green;
+      }
+
+      #musicToggle {
+        margin-top: 15px;
+        padding: 10px 20px;
+        font-size: 16px;
+        border: none;
+        background-color: #ff5733;
+        color: white;
+        border-radius: 5px;
+        cursor: pointer;
+      }
+      
+      #musicToggle:hover {
+        background-color: #e04d2a;
+      }
+      
+    </style>
+</head>
+<body>
+
+    <div class="countdown">
+        <h1>Days Until February 23</h1>
+        <p id="days"></p>
+        <p id="time"></p>
+        <button id="musicToggle">🔊 Play/Pause Music</button>
+    </div>
+    
+    <audio id="backgroundMusic" loop>
+      <source src="Betsy, Мария Янковская - Sigma Boy.mp3" type="audio/mpeg">
+    </audio>
+
+
+    <script>
+        
+      function updateCountdown() {
+        const targetDate = new Date('February 23, 2025 00:00:00');
+        const now = new Date();
+        const timeDifference = targetDate - now;
+      
+        // Calculate days, hours, minutes, and seconds
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+      
+        // Update HTML elements
+        document.getElementById("days").innerText = days + " Days";
+        document.getElementById("time").innerText = 
+          hours.toString().padStart(2, '0') + ":" +
+          minutes.toString().padStart(2, '0') + ":" +
+          seconds.toString().padStart(2, '0');
+      
+        // Repeat the function every second
+        setTimeout(updateCountdown, 1000);
+      }
+
+      // Music Control
+      const music = document.getElementById("backgroundMusic");
+      const musicToggle = document.getElementById("musicToggle");
+
+      musicToggle.addEventListener("click", () => {
+        if (music.paused) {
+          music.play();
+          musicToggle.innerText = "⏸ Pause Music";
+        } else {
+          music.pause();
+          musicToggle.innerText = "🔊 Play Music";
+        }
+      });
+      
+      // Initialize countdown when page loads
+      window.onload = updateCountdown;
+      
+          
+    </script>
+    
+</body>
+</html>
