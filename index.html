@@ -111,13 +111,8 @@
       const musicToggle = document.getElementById("musicToggle");
 
       musicToggle.addEventListener("click", () => {
-        if (music.paused) {
-          music.play();
-          musicToggle.innerText = "⏸ Pause Music";
-        } else {
-          music.pause();
-          musicToggle.innerText = "🔊 Play Music";
-        }
+        music.play(); // Start playing music
+        musicToggle.style.display = "none"; // Hide the button
       });
       
       // Initialize countdown when page loads
